@@ -1,0 +1,13 @@
+## Days 1–10: Core Concepts & Kernel Basics  
+| Day | Puzzle Title                       | Description                                                                                                                |
+|-----|------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| 1   | Hello, Thread!                     | Launch a kernel where each thread prints “Hello from thread X”. Use `threadIdx.x`, `blockIdx.x`, `blockDim.x`.            |
+| 2   | Global ID Calculation              | Write each thread’s global ID into a device array; copy back and verify on host.                                          |
+| 3   | Vector Add (GPU)                   | Add two float arrays on the GPU one element per thread; verify result on the host.                                        |
+| 4   | Grid of Threads                    | Expand vector add to multiple blocks; inside kernel print `(blockIdx.x, threadIdx.x)` for one sample thread.              |
+| 5   | Scalar Multiply                    | Multiply each element of a float array by a scalar value on the GPU.                                                      |
+| 6   | Square Each Element                | Square every element of an input array in‑place using a simple CUDA kernel.                                               |
+| 7   | Host vs Device Timing              | Time a kernel vs. a CPU loop in your playground (e.g., using `clock()` or built‑in timers).                               |
+| 8   | Allocate on Device                 | `cudaMalloc` a device array, fill it in a kernel, and copy back with `cudaMemcpy`.                                        |
+| 9   | Shared Memory Tile                 | Load an 8‑element tile into `__shared__` memory, apply a transform, and write back to global memory.                       |
+| 10  | 2D Thread Mapping                  | Launch a 2D grid/block, then print each thread’s 2D global coordinates (row, col).                                        |
