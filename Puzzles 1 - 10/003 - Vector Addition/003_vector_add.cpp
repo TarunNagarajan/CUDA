@@ -1,16 +1,14 @@
 #include <iostream>
-#include <cmath>
-#include <cuda_runtime.h>
+#include <cuda_runtime.h> 
 
-#define N (1 << 20)          // 2^20 elements
+#define N (1 << 20)     
 #define THREADS_PER_BLOCK 256
 
-// CUDA kernel: vector add and print one thread's info
-__global__ void vectorAdd(const float* A, const float* B, float* C, int n) {
-    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+__global__ void vector_add(const float* A, const float* B, float* C, int n) {
+    int idx = blockDim.x * blockIdx.x + threadIdx.x;
 
     if (blockIdx.x == 0 && threadIdx.x == 0) {
-        printf("Hello from blockIdx.x = %d, threadIdx.x = %d\n", blockIdx.x, threadIdx.x);
+        printf("Hello NVIDIA GTX TITAN X from blockIdx.x = %d, threadIdx.x = %d\n", blockIdx.x, threadIdx.x);
     }
 
     if (idx < n) {
@@ -18,60 +16,62 @@ __global__ void vectorAdd(const float* A, const float* B, float* C, int n) {
     }
 }
 
-// Verifies results on the host
-void verifyResult(const float* A, const float* B, const float* C, int n) {
-    for (int i = 0; i < n; ++i) {
+void verify(const float* A, const float* B, const float* C, int n) {
+    for (int i = 0; i < n; i++) {
         float expected = A[i] + B[i];
-        if (fabs(C[i] - expected) > 1e-5f) {
-            std::cerr << "Mismatch at index " << i << ": " << C[i] << " != " << expected << "\n";
-            return;
-        }
+        if (fabs(expected - C[i]) > 1e-5f) {
+            std::cerr << "Mismatch occured at the index " << i << " != " << expected << "\n";
+            return; 
+        } 
     }
-    std::cout << "Result verified! ✅\n";
+
+    std::cout << "Result Verified.\n";
 }
 
 int main() {
-    size_t bytes = N * sizeof(float);
+    size_t bytes = sizeof(float) * N; 
 
-    // Host memory
-    float *h_A = new float[N];
-    float *h_B = new float[N];
-    float *h_C = new float[N];
+    // host memory, on the cpu.
+    float *h_a = new float[N];
+    float *h_b = new float[N];
+    float *h_c = new float[N];
 
-    // Initialize inputs
-    for (int i = 0; i < N; ++i) {
-        h_A[i] = static_cast<float>(i);
-        h_B[i] = static_cast<float>(2 * i);
+    // initialize arrays
+    for (int i = 0; i < N; i++) {
+        h_a[i] = static_cast<float>(i);
+        h_b[i] = static_cast<float>(2 * i);
     }
 
-    // Device memory
-    float *d_A, *d_B, *d_C;
-    cudaMalloc(&d_A, bytes);
-    cudaMalloc(&d_B, bytes);
-    cudaMalloc(&d_C, bytes);
+    // device memory, on the gpu
+    float *d_a; 
+    float *d_b;
+    float *d_c;
 
-    // Copy to device
-    cudaMemcpy(d_A, h_A, bytes, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_B, h_B, bytes, cudaMemcpyHostToDevice);
+    cudaMalloc(&d_a, bytes);
+    cudaMalloc(&d_b, bytes);
+    cudaMalloc(&d_c, bytes);
 
-    // Launch kernel
-    int blocks = (N + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
-    vectorAdd<<<blocks, THREADS_PER_BLOCK>>>(d_A, d_B, d_C, N);
+    cudaMemcpy(d_a, h_a, bytes, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, h_b, bytes, cudaMemcpyHostToDevice);
+
+    // launch kernel
+    int blocks = (N - 1 + THREADS_PER_BLOCK) / THREADS_PER_BLOCK;
+    vector_add<<<blocks, THREADS_PER_BLOCK>>>(d_a, d_b, d_c, N);
     cudaDeviceSynchronize();
 
-    // Copy result back
-    cudaMemcpy(h_C, d_C, bytes, cudaMemcpyDeviceToHost);
+    cudaMemcpy(h_c, d_c, bytes, cudaMemcpyDeviceToHost); 
+    
+    verify(h_a, h_b, h_c, N);
 
-    // Verify
-    verifyResult(h_A, h_B, h_C, N);
+    // memory cleanup
+    delete[] h_a;
+    delete[] h_b;
+    delete[] h_c;
 
-    // Cleanup
-    delete[] h_A;
-    delete[] h_B;
-    delete[] h_C;
-    cudaFree(d_A);
-    cudaFree(d_B);
-    cudaFree(d_C);
+    cudaFree(d_a); 
+    cudaFree(d_b);
+    cudaFree(d_c);
 
     return 0;
+    
 }
