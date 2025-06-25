@@ -1,4 +1,4 @@
-## Days 1–10: Core Concepts & Kernel Basics  
+## Puzzles 1 - 10: Core Concepts & Kernel Basics  
 | Day | Puzzle Title                       | Description                                                                                                                |
 |-----|------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | 1   | Hello, Thread!                     | Launch a kernel where each thread prints “Hello from thread X”. Use `threadIdx.x`, `blockIdx.x`, `blockDim.x`.            |
