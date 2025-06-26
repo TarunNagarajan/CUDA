@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cuda_runtime.h>
 #include <ctime>
+#include <cmath>
 
-#define N (1 << 20)
+#define N (1 << 20) // 1M elements
 
-// GPU kernel: square elements in-place
 __global__ void squareGPU(float* data, int n) {
     int idx = blockDim.x * blockIdx.x + threadIdx.x;
     if (idx < n) {
@@ -12,10 +12,9 @@ __global__ void squareGPU(float* data, int n) {
     }
 }
 
-// CPU version: square elements in-place
 void squareCPU(float* data, int n) {
     for (int i = 0; i < n; i++) {
-        data[i] *= data[i]; 
+        data[i] *= data[i];
     }
 }
 
@@ -26,12 +25,12 @@ int main() {
     float* h_data_cpu = new float[N];
     float* h_data_gpu = new float[N];
 
-    // Initialize both arrays with the same data
+    // Initialize data
     for (int i = 0; i < N; i++) {
-        h_data_cpu[i] = h_data_gpu[i] = 1.0f * i;  // 🔧 Fix: assign values element-wise
+        h_data_cpu[i] = h_data_gpu[i] = static_cast<float>(i);
     }
 
-    // CPU timing using clock()
+    // CPU timing
     clock_t start_cpu = clock();
     squareCPU(h_data_cpu, N);
     clock_t end_cpu = clock();
@@ -42,35 +41,59 @@ int main() {
     // Allocate device memory
     float* d_data;
     cudaMalloc(&d_data, bytes);
-    cudaMemcpy(d_data, h_data_gpu, bytes, cudaMemcpyHostToDevice);
 
-    // Create CUDA events for timing
-    cudaEvent_t start, stop;
-    cudaEventCreate(&start);
+    // Create events
+    cudaEvent_t startH2D, startKernel, startD2H, stop;
+    cudaEventCreate(&startH2D);
+    cudaEventCreate(&startKernel);
+    cudaEventCreate(&startD2H);
     cudaEventCreate(&stop);
 
+    // Launch config
     int threads = 256;
     int blocks = (N + threads - 1) / threads;
 
-    // GPU timing using events
-    cudaEventRecord(start);
+    // Segment 1: H2D
+    cudaEventRecord(startH2D);
+    cudaMemcpy(d_data, h_data_gpu, bytes, cudaMemcpyHostToDevice);
+    cudaEventRecord(startKernel);
+
+    // Segment 2: Kernel execution
     squareGPU<<<blocks, threads>>>(d_data, N);
+    cudaEventRecord(startD2H);
+
+    // Segment 3: D2H
+    cudaMemcpy(h_data_gpu, d_data, bytes, cudaMemcpyDeviceToHost);
     cudaEventRecord(stop);
 
-    cudaEventSynchronize(stop);  // 🔧 Fix: sync `stop`, not whole device
+    // Sync and measure
+    cudaEventSynchronize(stop);
 
-    float time_gpu_ms;
-    cudaEventElapsedTime(&time_gpu_ms, start, stop);
-    std::cout << "GPU Time: " << time_gpu_ms << " ms\n";
+    float timeH2D, timeKernel, timeD2H;
+    cudaEventElapsedTime(&timeH2D, startH2D, startKernel);
+    cudaEventElapsedTime(&timeKernel, startKernel, startD2H);
+    cudaEventElapsedTime(&timeD2H, startD2H, stop);
 
-    // Copy result back to host
-    cudaMemcpy(h_data_gpu, d_data, bytes, cudaMemcpyDeviceToHost);
+    std::cout << "H2D Transfer Time: " << timeH2D << " ms\n";
+    std::cout << "Kernel Execution Time: " << timeKernel << " ms\n";
+    std::cout << "D2H Transfer Time: " << timeD2H << " ms\n";
 
-    // Cleanup
+    for (int i = 0; i < N; ++i) {
+        if (fabs(h_data_cpu[i] - h_data_gpu[i]) > 1e-5f) {
+            std::cerr << "Mismatch at index " << i << ": CPU=" 
+                      << h_data_cpu[i] << ", GPU=" << h_data_gpu[i] << "\n";
+            break;
+        }
+    }
+
+    // Clean up
     cudaFree(d_data);
     delete[] h_data_cpu;
     delete[] h_data_gpu;
-    cudaEventDestroy(start);
+
+    cudaEventDestroy(startH2D);
+    cudaEventDestroy(startKernel);
+    cudaEventDestroy(startD2H);
     cudaEventDestroy(stop);
 
     return 0;
