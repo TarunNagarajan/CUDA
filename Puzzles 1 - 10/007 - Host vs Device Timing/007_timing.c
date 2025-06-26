@@ -15,7 +15,7 @@ __global__ void squareGPU(float* data, int n) {
 // CPU version: square elements in-place
 void squareCPU(float* data, int n) {
     for (int i = 0; i < n; i++) {
-        data[i] *= data[i];  // 🔧 Fix: use `i`, not `idx`
+        data[i] *= data[i]; 
     }
 }
 
