@@ -23,7 +23,7 @@ __global__ void tiled_vecadd(float* a, float* b, float* c, int n) {
         /*
 
         so in my understanding, we start from i = 0, and skip jump
-        the TILE_SIZE = 256 times * the number of blocks and the 
+        the TILE_SIZE = 256 times the number of blocks and the 
         threads take care of the rest.
 
         the loop allows each block to process multiple tiles strided
