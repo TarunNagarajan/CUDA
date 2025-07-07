@@ -46,6 +46,7 @@ __global__ void tiled_matmul(float* A, float* B, float* C, int M, int N, int K) 
 
         __syncthreads();
 
+        // here's the actual computation
         for (int i = 0; i < TILE_SIZE; i++) {
             sum += As[ty][i] * Bs[i][tx];
         }
