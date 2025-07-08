@@ -5,6 +5,18 @@
 #include <iomanip>
 #include <cfloat>
 
+/*
+
+Running in FUNCTIONAL mode...
+Compiling...
+Executing...
+Host to Device Transfer: 63.6765 ms
+Kernel Execution: 5.0476 ms
+Device to Host Transfer: 16.2689 ms
+Exit status: 0
+
+*/
+
 __global__ void shared_softmax(const float* A, float* B, int M, int N) {
     __shared__ float smem[1024]; 
 
@@ -154,15 +166,3 @@ int main() {
 
     return 0;
 }
-
-/*
-
-Running in FUNCTIONAL mode...
-Compiling...
-Executing...
-Host to Device Transfer: 63.6765 ms
-Kernel Execution: 5.0476 ms
-Device to Host Transfer: 16.2689 ms
-Exit status: 0
-
-*/
