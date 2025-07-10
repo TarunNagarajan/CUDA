@@ -1,3 +1,14 @@
 # CUDA
 
-I like high-performance computing applications. Unfortunately, I don't own a GPU, let alone a NVIDIA one. I've taken to using LeetGPU, which offers a CUDA playground for people to create simple CUDA kernels. GPU Computing looks really interesting, now that I'm taking a Computer Architecture course in college. It also helps that I do know C/C++. I'm recording my progress with the help of puzzles which instruct me to write kernels (even the naive version, sometimes) so that I can learn things along the way. 
+This repository documents my CUDA learning journey focused on AI inference and systems-level GPU programming.
+Although I don’t have access to a GPU locally, I use LeetGPU.com to write and test CUDA kernels remotely.
+I'm following the book *Programming Massively Parallel Processors* by David B. Kirk and Wen-mei W. Hwu and the Official CUDA documentation.  
+
+| S.No | Kernel Name        | Description                                  |
+| ---- | ------------------ | -------------------------------------------- |
+| 1    | `naive_softmax.cu` | Row-wise softmax using global memory access  |
+| 2    | `bmm_layernorm.cu` | Batched matrix multiplication + LayerNorm    |
+| 3    | `einsum_perf.cu`   | Einsum-style fused operations with profiling |
+| 4    | `spmm_tiled.cu`    | Tiled sparse-dense matrix multiplication     |
+| ...  |                    |                                              |
+
