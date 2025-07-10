@@ -6,7 +6,7 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 
 | S.No | Kernel Name        | Description                                  |
 | ---- | ------------------ | -------------------------------------------- |
-| 1    | `naive_softmax.cu` | Row-wise softmax using global memory access  |
+| 1    | [Hello World ft. CUDA](Puzzles 1 - 10/001 - Hello GPU/001_hello_gpu.cu) | Row-wise softmax using global memory access  |
 | 2    | `bmm_layernorm.cu` | Batched matrix multiplication + LayerNorm    |
 | 3    | `einsum_perf.cu`   | Einsum-style fused operations with profiling |
 | 4    | `spmm_tiled.cu`    | Tiled sparse-dense matrix multiplication     |
