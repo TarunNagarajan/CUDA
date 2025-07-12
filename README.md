@@ -7,8 +7,4 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 | S.No | Kernel Name        | Description                                  |
 | ---- | ------------------ | -------------------------------------------- |
 | 1    | [Hello World ft. CUDA](puzzles/puzzles_01_10/001_hello_world_gpu/001_hello_world_gpu.cu) | Printed 'Hello World' with multiple threads in parallel  |
-| 2    | `bmm_layernorm.cu` | Batched matrix multiplication + LayerNorm    |
-| 3    | `einsum_perf.cu`   | Einsum-style fused operations with profiling |
-| 4    | `spmm_tiled.cu`    | Tiled sparse-dense matrix multiplication     |
-| ...  |                    |                                              |
 
