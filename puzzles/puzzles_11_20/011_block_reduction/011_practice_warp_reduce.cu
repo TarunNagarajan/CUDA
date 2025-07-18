@@ -3,8 +3,6 @@
 #include <cmath>
 #include <cfloat>
 
-// Junky version with improper memory management. 
-
 #define N 1024
 #define BLOCK_SIZE 256
 
