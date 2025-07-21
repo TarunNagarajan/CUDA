@@ -6,5 +6,7 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 
 | S.No | Kernel Name        | Description                                  |
 | ---- | ------------------ | -------------------------------------------- |
-| 1    | [Hello World ft. CUDA](puzzles/puzzles_01_10/001_hello_world_gpu/001_hello_world_gpu.cu) | Printed 'Hello World' with multiple threads in parallel  |
+| 1    | [Hello World ft. CUDA](puzzles/puzzles_01_10/001_hello_world_gpu/001_hello_world_gpu.cu) | 'Hello World' with multiple threads in parallel  |
+| 2    | [Global Id](puzzles/puzzles_01_10/002_global_id/002_global_id.cu) | Global IDs of each thread |
+| 3    | []() |  |
 
