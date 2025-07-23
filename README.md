@@ -7,7 +7,7 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 ## Playlist
 | S.No | Topic Name        | Description                                  |
 | ---- | ------------------ | -------------------------------------------- |
-| 1    | [Softmax](playlist/softmax) | multiple versions of softmax with incremental improvement, including __shfl_down_sync and learning warp reduction  |
+| 1    | [Softmax](playlist/softmax) | multiple versions of softmax with incremental improvement (warp level reductions and shuffling) |
 | 2    | [Layernorm](playlist/layernorm) |  |
 
 ## Puzzles
