@@ -16,6 +16,6 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 | 1    | [Hello World ft. CUDA](puzzles/puzzles_01_10/001_hello_world_gpu/001_hello_world_gpu.cu) | 'Hello World' with multiple threads in parallel  |
 | 2    | [Global Id](puzzles/puzzles_01_10/002_global_id/002_global_id.cu) | Global IDs of each thread |
 | 3    | [Vector Addition](puzzles/puzzles_01_10/003_vector_addition/003_vec_add.cu) | Non-Strided Vector Addition |
-| 4    | []() |  |
+| 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
 
 
