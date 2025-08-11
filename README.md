@@ -18,7 +18,7 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 | 3    | [Vector Addition](puzzles/puzzles_01_10/003_vector_addition/003_vec_add.cu) | Non-Strided Vector Addition |
 | 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
 | 5    | [Scalar Multiplication](puzzles/puzzles_01_10/005_scalar_multiplication/005_scalar_multiply.cu) | Scalar Multiplication |
-| 6    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
+| 6    | [Squaring In-place](puzzles/puzzles_01_10/006_square_each_element/006_square_each_element.cu) | Squaring the elements of an array in-place via linear traversal |
 | 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
 | 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
 | 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
