@@ -21,7 +21,7 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 | 6    | [Squaring In-place](puzzles/puzzles_01_10/006_square_each_element/006_square_each_element.cu) | Squaring the elements of an array in-place via linear traversal |
 | 7    | [Timing on Device](puzzles/puzzles_01_10/007_timing_device/007_timing.c) | Learnt to manage CUDA events |
 | 8    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
-| 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
-| 4    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
+| 9    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
+| 10    | [Grid of Threads](puzzles/puzzles_01_10/004_grid_of_threads/004_grid_threads.cu) | Implement a grid of threads |
 
 
