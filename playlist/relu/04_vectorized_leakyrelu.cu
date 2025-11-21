@@ -37,7 +37,7 @@ extern "C" void solution(const float* input, float alpha, float* output, size_t 
     int deviceID;
     cudaGetDevice(&deviceID);
 
-    int threads = 1024;
+    int threads = 256;
     int blocks;
 
     int numSM;
