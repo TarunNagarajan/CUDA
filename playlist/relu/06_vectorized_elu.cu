@@ -22,7 +22,7 @@ __global__ void elu(const float* __restrict__ input, float* __restrict__ output,
 
     size_t totalvectors = totalsize / 4;
     size_t idx = blockDim.x * blockIdx.x + threadIdx.x;
-    size_t stride = blockDim.x + gridDim.x;
+    size_t stride = blockDim.x * gridDim.x;
 
     for (size_t i = idx; i < totalvectors; i += stride) {
         float4 v = inputvector[i];
