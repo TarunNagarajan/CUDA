@@ -8,7 +8,7 @@ I'm following the book *Programming Massively Parallel Processors* by David B. K
 | S.No | Topic Name        | Description                                  |
 | ---- | ------------------ | -------------------------------------------- |
 | 1    | [Softmax](playlist/softmax) | Multiple Iterations of Softmax (with Warp Level Reductions and Shuffling) |
-| 2    | [Layernorm](playlist/layernorm) |  In Progress |
+| 2    | [Layernorm](playlist/layernorm) |  Multiple Iterations of Softmax (with Warp Level Reductions and Shuffling) |
 | 3    | [Convolution](playlist/convolution) |  Multiple Iterations of Convolution Types |
 | 4    | [Activations](playlist/relu) |  Different activation functions, each with multiple optimizing iterations |
 
